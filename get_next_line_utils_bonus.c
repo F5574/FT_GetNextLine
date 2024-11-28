@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gvon-ah- <gvon-ah-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/19 14:46:30 by gvon-ah-          #+#    #+#             */
-/*   Updated: 2024/11/26 16:36:31 by gvon-ah-         ###   ########.fr       */
+/*   Created: 2024/11/26 16:42:09 by gvon-ah-          #+#    #+#             */
+/*   Updated: 2024/11/28 12:34:16 by gvon-ah-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*aux_strjoin(char *s1, char *s2)
 {
@@ -43,7 +43,7 @@ char	*aux_strjoin(char *s1, char *s2)
 
 size_t	aux_len(char *str)
 {
-	size_t		i;
+	size_t	i;
 
 	i = 0;
 	while (str && str[i] && str[i] != '\n')

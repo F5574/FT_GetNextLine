@@ -1,37 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gvon-ah- <gvon-ah-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:46:34 by gvon-ah-          #+#    #+#             */
-/*   Updated: 2024/11/26 17:00:05 by gvon-ah-         ###   ########.fr       */
+/*   Updated: 2024/11/26 17:00:34 by gvon-ah-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*get_next_line(int fd)
 {
-	static char	buffer[BUFFER_SIZE + 1];
+	static char	buffer[FOPEN_MAX][BUFFER_SIZE + 1];
 	char		*res;
 	int			i;
 
 	i = 0;
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || FOPEN_MAX <= fd)
 	{
-		while (i <= BUFFER_SIZE)
-			buffer[i++] = '\0';
+		if (fd > 0 && FOPEN_MAX > fd)
+			while (buffer[fd][i])
+				buffer[fd][i++] = '\0';
 		return (NULL);
 	}
 	res = NULL;
-	while (buffer[0] || read(fd, buffer, BUFFER_SIZE) > 0)
+	while (buffer[fd][0] || read(fd, buffer[fd], BUFFER_SIZE) > 0)
 	{
-		res = aux_strjoin(res, buffer);
+		res = aux_strjoin(res, buffer[fd]);
 		if (!res)
 			return (NULL);
-		aux_buffer_clean(buffer);
+		aux_buffer_clean(buffer[fd]);
 		if (res[aux_len(res) - 1] == '\n')
 			return (res);
 	}
